@@ -1,21 +1,10 @@
- name: Mi primer flujo de trabajo
- 
-# Este flujo se activa cuando alguien crea una Pull Request
+name: Post welcome comment
 on:
   pull_request:
     types: [opened]
- 
+permissions:
+  pull-requests: write
 jobs:
-  saludo:
+  welcome:
+    name: Post welcome comment
     runs-on: ubuntu-latest
-    steps:
-      - name: Crear un comentario
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '¡Hola! He completado el primer paso de GitHub Actions. 🚀'
-            })
